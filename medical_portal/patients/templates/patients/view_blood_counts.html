@@ -1,0 +1,46 @@
+{% extends 'patients/base.html' %}
+
+{% block content %}
+<h2>Uploaded Blood Counts</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>File</th>
+            <th>Uploaded At</th>
+            <th>View File</th>
+            <th>Explanation</th>
+            <th>Analyze</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for blood_count in blood_counts %}
+        {% if  blood_count.patient.username == user.username %}
+        <tr>
+            <td>{{ blood_count.patient.username }}</td>
+            <td><a href="{{ blood_count.file.url }}">Download</a></td>
+            <td>{{ blood_count.uploaded_at }}</td>
+            <td><a href="{% url 'view_blood_count_file' blood_count.id %}">View File</a></td>
+            <td><a href="{% url 'file_explanation' blood_count.id %}">Explanation</a></td>
+            <td><a href="{% url 'analyze_blood_test' blood_count.id %}">Analyze</a></td>
+
+
+        </tr>
+        {% elif request.user.is_staff %}
+        <tr>
+            <td>{{ blood_count.patient.username }}</td>
+            <td><a href="{{ blood_count.file.url }}">Download</a></td>
+            <td>{{ blood_count.uploaded_at }}</td>
+            <td><a href="{% url 'view_blood_count_file' blood_count.id %}">View File</a></td>
+            <td><a href="{% url 'file_explanation' blood_count.id %}">Explanation</a></td>
+            <td><a href="{% url 'analyze_blood_test' blood_count.id %}">Analyze</a></td>
+
+
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

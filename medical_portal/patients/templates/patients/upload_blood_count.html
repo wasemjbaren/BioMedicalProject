@@ -1,0 +1,11 @@
+<!-- patients/templates/patients/upload_blood_count.html -->
+{% extends 'patients/base.html' %}
+
+{% block content %}
+<h2>Upload Blood Count</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+{% endblock %}

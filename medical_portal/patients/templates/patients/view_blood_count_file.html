@@ -1,0 +1,32 @@
+<!-- patients/templates/patients/view_blood_count_file.html -->
+{% extends 'patients/base.html' %}
+
+{% block content %}
+<h2>Blood Test Details for {{ blood_count.patient.username }}</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4>CSV Data:</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    {% for header in table_data.0 %}
+                    <th>{{ header }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table_data|slice:"1:" %}
+                <tr>
+                    {% for cell in row %}
+                    <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<a href="{% url 'view_blood_counts' %}">Back to Blood Counts</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'patients/base.html' %}
+
+{% block title %}Your Documents{% endblock %}
+<h2>Your Documents</h2>
+{% block content %}
+<ul>
+    {% for document in documents %}
+        <li><a href="{{ document.document_file.url }}">{{ document.document_name }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

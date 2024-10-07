@@ -1,0 +1,31 @@
+{% extends 'patients/base.html' %}
+
+{% block content %}
+<h2>Blood Test Analysis for {{ blood_count.patient.username }}</h2>
+ <ul>
+        {% for result in analysis_results %}
+            <li>
+                {% if result.status == 'Potential Indicator' %}
+                    <h5>Diseases</h5>
+                    <strong>{{ result.disease }}:</strong>
+                    {{ result.description }}<br><br>
+
+                    <h5>Below Normal Range</h5>
+                {% elif result.status == 'Below Normal Range' %}
+                    <strong>{{ result.component }}:</strong>
+                    {{ result.status }} (Value: {{ result.value }}, Normal Range: {{ result.normal_range }})<br>
+                {% elif result.status == 'Above Normal Range' %}
+                    <strong>{{ result.component }}:</strong>
+                    {{ result.status }} (Value: {{ result.value }}, Normal Range: {{ result.normal_range }})<br>
+                {% else %}
+                    {{ result.message }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+<a href="{% url 'view_blood_counts' %}">Back to Blood Counts</a>
+{% endblock %}
+
+
+
+
